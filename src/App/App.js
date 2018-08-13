@@ -1,35 +1,24 @@
 import React, { Component } from 'react';
-import { Grid, Navbar, Jumbotron, Button } from 'react-bootstrap';
+import { Route, Switch } from 'react-router-dom';
+
+import Header from '../Components/Header';
+
+import About from '../Pages/About/About';
+import Home from '../Pages/Home/Home';
+import NotFound from '../Pages/NotFound/NotFound';
+
 import './App.css';
 
 class App extends Component {
   render() {
   	return (
-			<div>
-				<Navbar inverse fixedTop>
-					<Grid>
-						<Navbar.Header>
-							<Navbar.Brand>
-								<a href="/">React App</a>
-							</Navbar.Brand>
-							<Navbar.Toggle />
-						</Navbar.Header>
-					</Grid>
-				</Navbar>
-				<Jumbotron>
-					<Grid>
-						<h1 className="Grid-header">Welcome to React</h1>
-						<p>
-							<Button
-								bsStyle="success"
-								bsSize="large"
-								href="http://react-bootstrap.github.io/components.html"
-								target="_blank">
-								View React Bootstrap Docs
-							</Button>
-						</p>
-					</Grid>
-				</Jumbotron>
+			<div className="App">
+				<Header />
+				<Switch>
+					<Route path="/" exact component={Home} />
+					<Route path="/about" component={About} />
+					<Route component={NotFound} />
+				</Switch>
 			</div>
 		);
   }
