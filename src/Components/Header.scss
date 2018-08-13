@@ -1,0 +1,18 @@
+.App-navbar {
+	margin: 0;
+}
+
+.App-logo-link {
+	margin: 0;
+	padding: 0;
+}
+
+.App-logo {
+	animation: App-logo-spin infinite 20s linear;
+	height: 50px;
+}
+
+@keyframes App-logo-spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
