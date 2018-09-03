@@ -1,7 +1,5 @@
-export class CoursesActions {
-	static CREATE_COURSE = 'CREATE_COURSE';
-}
+import * as CoursesActionTypes from '../ActionTypes/CoursesActionTypes';
 
 export const createCourse = (course) => {
-	return {type: CoursesActions.CREATE_COURSE, course};
+	return {type: CoursesActionTypes.CREATE_COURSE, course};
 };
