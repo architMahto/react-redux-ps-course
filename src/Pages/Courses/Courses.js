@@ -25,10 +25,6 @@ class Courses extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	courseRow(course, index) {
-		return <div key={index}>{course.title}</div>;
-	}
-
 	onFieldChange(event) {
 		this.setState({
 			course: {
