@@ -35,7 +35,7 @@ class Courses extends Component {
 	handleSubmit(event) {
 		event.preventDefault();
 
-		this.props.dispatch(coursesActions.createCourse(this.state.course));
+		this.props.createCourse(this.state.course);
 	}
 
 	render() {
@@ -62,10 +62,16 @@ class Courses extends Component {
 	}
 }
 
+function mapDispatchToProps(dispatch) {
+	return {
+		createCourse: course => dispatch(coursesActions.createCourse(course))
+	}
+}
+
 function mapStateToProps(state, ownProps) {
 	return {
 		courses: state.courses
 	};
 }
 
-export default connect(mapStateToProps)(Courses);
+export default connect(mapStateToProps, mapDispatchToProps)(Courses);
