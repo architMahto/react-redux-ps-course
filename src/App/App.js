@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import Header from '../Components/Header';
 
@@ -8,20 +9,28 @@ import Courses from '../Pages/Courses/Courses';
 import Home from '../Pages/Home/Home';
 import NotFound from '../Pages/NotFound/NotFound';
 
+import configureStore from '../Store/ConfigureStore';
+
 import './App.css';
+
+const store = configureStore();
 
 class App extends Component {
   render() {
   	return (
-			<div className="App">
-				<Header />
-				<Switch>
-					<Route path="/" exact component={Home} />
-					<Route path="/about" component={About} />
-					<Route path="/courses" component={Courses} />
-					<Route component={NotFound} />
-				</Switch>
-			</div>
+  		<Provider store={store}>
+				<Router>
+					<div className="App">
+						<Header />
+						<Switch>
+							<Route path="/" exact component={Home} />
+							<Route path="/about" component={About} />
+							<Route path="/courses" component={Courses} />
+							<Route component={NotFound} />
+						</Switch>
+					</div>
+				</Router>
+			</Provider>
 		);
   }
 }
