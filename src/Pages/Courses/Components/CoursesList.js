@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { PageHeader } from 'react-bootstrap';
+import React from 'react';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 import './CoursesList.css';
 
-class CoursesList extends Component {
-	render() {
-		return (
-			<div className="Courses-Page">
-				<PageHeader>Courses</PageHeader>
-			</div>
-		);
-	}
-}
+const CoursesList = ({ courses }) => {
+	return (
+		<ListGroup>
+			{courses.map((course, index) => {
+				return <ListGroupItem key={index}>{course.title}</ListGroupItem>
+			})}
+		</ListGroup>
+	);
+};
 
 export default CoursesList;

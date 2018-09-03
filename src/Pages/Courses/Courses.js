@@ -3,8 +3,11 @@ import { Col, Grid, PageHeader, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import CourseForm from './Components/CourseForm';
+import CoursesList from './Components/CoursesList';
 
 import * as coursesActions from '../../Actions/CoursesActions';
+
+import './Courses.css';
 
 class Courses extends Component {
 	constructor(props) {
@@ -38,7 +41,6 @@ class Courses extends Component {
 	handleSubmit(event) {
 		event.preventDefault();
 
-		// alert(`Saving ${this.state.course.title}`);
 		this.props.dispatch(coursesActions.createCourse(this.state.course));
 	}
 
@@ -56,8 +58,9 @@ class Courses extends Component {
 						</Col>
 					</Row>
 					<Row>
-						<h1>Courses List</h1>
-						{this.props.courses.entities.map(this.courseRow)}
+						<Col xs={12} sm={6} smOffset={3}>
+							<CoursesList courses={this.props.courses.entities} />
+						</Col>
 					</Row>
 				</Grid>
 			</div>
