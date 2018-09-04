@@ -1,7 +1,7 @@
 import React from 'react';
 import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 
-const TextInput = ({label, name, value, placeholder, onFieldChange}) => {
+const TextInput = ({label, name, value, placeholder, onFieldChange, error}) => {
 	return (
 		<FormGroup controlId={name}>
 			<ControlLabel>{label}</ControlLabel>

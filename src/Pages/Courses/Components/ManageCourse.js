@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Col, Grid, PageHeader, Row } from 'react-bootstrap';
+
+import * as CoursesActions from '../../../Actions/CoursesActions';
 
 import CourseForm from './CourseForm';
 
@@ -46,4 +50,14 @@ class ManageCourse extends Component {
 	}
 }
 
-export default ManageCourse;
+function mapStateToProps(state, ownProps) {
+	return { state };
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		actions: bindActionCreators(CoursesActions, dispatch)
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManageCourse);

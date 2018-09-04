@@ -5,9 +5,9 @@ import TextInput from '../../../Components/TextInput';
 
 import './CourseForm.css';
 
-const CourseForm = ({ course, onFieldChange, handleSubmit }) => {
+const CourseForm = ({ course, onFieldChange, onSubmit, allAuthors, loading, errors }) => {
 	return (
-		<form className="Course-Form" onSubmit={handleSubmit}>
+		<form className="Course-Form" onSubmit={onSubmit}>
 			<TextInput label="Add Course:"
 								 name="title"
 								 placeholder="Enter course title"
@@ -15,6 +15,7 @@ const CourseForm = ({ course, onFieldChange, handleSubmit }) => {
 								 onFieldChange={onFieldChange}/>
 			<br/>
 			<Button type={'submit'}
+							disabled={loading}
 							bsSize={'large'}>
 				Save
 			</Button>
