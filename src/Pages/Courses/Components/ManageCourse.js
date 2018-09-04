@@ -15,6 +15,7 @@ class ManageCourse extends Component {
 		this.authorsActions = props.authorsActions;
 		this.coursesActions = props.coursesActions;
 		this.history = props.history;
+		this.match = props.match;
 		this.state = {
 			course: Object.assign({}, this.props.course),
 			errors: {}
@@ -25,6 +26,9 @@ class ManageCourse extends Component {
 	}
 
 	componentDidMount() {
+		if (this.match.params.hasOwnProperty('id') && !this.state.course.title) {
+			this.history.push('/courses');
+		}
 		this.authorsActions.getAuthors();
 	}
 
@@ -40,8 +44,6 @@ class ManageCourse extends Component {
 
 	onSubmit(event) {
 		event.preventDefault();
-		console.log('this.state.course:', this.state.course);
-		// alert(`Saving ${this.state.course.title}`);
 		this.coursesActions.saveCourse(this.state.course);
 		this.history.push('/courses');
 	}
@@ -67,7 +69,11 @@ class ManageCourse extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-	let course = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
+	const courseId = ownProps.match.params.id;
+	let course = courseId ?
+		state.courses.entities.find(course => course.id === courseId) :
+		{id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
+
 	return {
 		authors: state.authors.entities.map(author => {
 			return {value: author.id, text: `${author.firstName} ${author.lastName}`};

@@ -16,6 +16,7 @@ const Courses = ({ match }) => {
 		<Switch>
 			<Route path={match.path} exact component={CoursesList} />
 			<Route path={`${match.path}/add-course`} component={ManageCourse} />
+			<Route path={`${match.path}/:id`} component={ManageCourse} />
 		</Switch>
 	);
 };
