@@ -18,7 +18,7 @@ class CoursesList extends Component {
 		this.match = props.match;
 	}
 
-	UNSAFE_componentWillMount() {
+	componentDidMount() {
 		this.actions.getCourses();
 	}
 

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Col, Grid, PageHeader, Row } from 'react-bootstrap';
 
+import * as AuthorsActions from '../../../Actions/AuthorsActions';
 import * as CoursesActions from '../../../Actions/CoursesActions';
 
 import CourseForm from './CourseForm';
@@ -11,14 +12,19 @@ class ManageCourse extends Component {
 	constructor(props) {
 		super(props);
 
+		this.authorsActions = props.authorsActions;
+		this.coursesActions = props.coursesActions;
 		this.state = {
-			authors: [],
 			course: Object.assign({}, this.props.course),
 			errors: {}
 		};
 
 		this.onFieldChange = this.onFieldChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
+	}
+
+	componentDidMount() {
+		this.authorsActions.getAuthors();
 	}
 
 	onFieldChange(event) {
@@ -44,7 +50,7 @@ class ManageCourse extends Component {
 					<Row>
 						<Col xs={12} sm={8} md={6} smOffset={2} mdOffset={3}>
 							<CourseForm course={this.state.course}
-													authors={this.state.authors}
+													authors={this.props.authors}
 													errors={this.state.errors}
 													onFieldChange={this.onFieldChange}
 													onSubmit={this.onSubmit} />
@@ -58,12 +64,18 @@ class ManageCourse extends Component {
 
 function mapStateToProps(state, ownProps) {
 	let course = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
-	return { course };
+	return {
+		authors: state.authors.entities.map(author => {
+			return {value: author.id, text: `${author.firstName} ${author.lastName}`};
+		}),
+		course
+	};
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		actions: bindActionCreators(CoursesActions, dispatch)
+		authorsActions: bindActionCreators(AuthorsActions, dispatch),
+		coursesActions: bindActionCreators(CoursesActions, dispatch)
 	};
 }
 
