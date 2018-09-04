@@ -5,12 +5,13 @@ const createOption = (option) => {
 	return <option key={option.value} value={option.value}>{option.text}</option>;
 };
 
-const SelectInput = ({label, name, value, placeholder, defaultOption, onChange, error, options}) => {
+const SelectInput = ({label, name, value, placeholder, defaultOption, onFieldChange, error, options}) => {
 	return(
 		<FormGroup controlId={name}
 							 validationState={error ? 'error' : null}>
 			<ControlLabel>{label}</ControlLabel>
 			<FormControl componentClass="select"
+									 bsSize="lg"
 									 placeholder={placeholder}
 									 name={name}>
 				<option value="">{defaultOption}</option>

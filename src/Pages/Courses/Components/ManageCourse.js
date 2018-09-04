@@ -12,14 +12,19 @@ class ManageCourse extends Component {
 		super(props);
 
 		this.state = {
+			authors: [],
 			course: {
 				title: ''
 			}
-		}
+		};
+
+		this.onFieldChange = this.onFieldChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	onFieldChange(event) {
 		this.setState({
+			...this.state,
 			course: {
 				...this.state.course,
 				[event.target.name]: event.target.value
@@ -40,6 +45,7 @@ class ManageCourse extends Component {
 					<Row>
 						<Col xs={12} sm={8} md={6} smOffset={2} mdOffset={3}>
 							<CourseForm course={this.state.course}
+													authors={this.state.authors}
 													onFieldChange={this.onFieldChange}
 													handleSubmit={this.handleSubmit} />
 						</Col>
