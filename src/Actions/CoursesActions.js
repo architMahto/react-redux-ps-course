@@ -31,7 +31,7 @@ export const saveCourse = (course) => {
 	return (dispatch) => {
 		dispatch(saveCourseStarted());
 
-		return MockCourseApi.saveCourse()
+		return MockCourseApi.saveCourse(course)
 			.then(savedCourse => {
 				course.id ?
 					dispatch(updateCourseSuccess(savedCourse)) :

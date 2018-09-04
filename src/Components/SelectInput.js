@@ -13,6 +13,7 @@ const SelectInput = ({label, name, value, placeholder, defaultOption, onFieldCha
 			<FormControl componentClass="select"
 									 bsSize="lg"
 									 placeholder={placeholder}
+									 onChange={onFieldChange}
 									 name={name}>
 				<option value="">{defaultOption}</option>
 				{options.map(createOption)}

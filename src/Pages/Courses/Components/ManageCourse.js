@@ -14,6 +14,7 @@ class ManageCourse extends Component {
 
 		this.authorsActions = props.authorsActions;
 		this.coursesActions = props.coursesActions;
+		this.history = props.history;
 		this.state = {
 			course: Object.assign({}, this.props.course),
 			errors: {}
@@ -39,7 +40,10 @@ class ManageCourse extends Component {
 
 	onSubmit(event) {
 		event.preventDefault();
-		alert(`Saving ${this.state.course.title}`);
+		console.log('this.state.course:', this.state.course);
+		// alert(`Saving ${this.state.course.title}`);
+		this.coursesActions.saveCourse(this.state.course);
+		this.history.push('/courses');
 	}
 
 	render() {

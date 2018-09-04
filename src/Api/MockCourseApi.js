@@ -7,7 +7,7 @@ class MockCourseApi {
 	}
 
 	static generateId(course) {
-		return this.replaceAll(course.title, ' ', '-');
+		return this.replaceAll(course.title, /[^\w+]/gi, '-').toLowerCase();
 	}
 
 	static getAllCourses() {
@@ -19,7 +19,7 @@ class MockCourseApi {
 	};
 
 	static saveCourse(course) {
-		let newCourse = Object.assign({}, course);
+		course = Object.assign({}, course);
 
 		return new Promise((resolve, reject) => {
 			setTimeout(() => {
@@ -31,15 +31,15 @@ class MockCourseApi {
 				}
 
 				if (course.id) {
-					const existingCourseIndex = COURSES_DATA.findIndex(c => c.id === newCourse.id)
+					const existingCourseIndex = COURSES_DATA.findIndex(c => c.id === course.id);
 					COURSES_DATA.splice(existingCourseIndex, 1, course);
 				} else {
 					// Just simulating creation here.
 					// The server would generate ids and watchHref's for new courses in a real app.
 					// Cloning so copy returned is passed by value rather than by reference.
-					newCourse.id = this.generateId(newCourse);
-					newCourse.watchHref = `http://www.pluralsight.com/courses/${course.id}`;
-					COURSES_DATA.push(newCourse);
+					course.id = this.generateId(course);
+					course.watchHref = `http://www.pluralsight.com/courses/${course.id}`;
+					COURSES_DATA.push(course);
 				}
 
 				resolve(course);
