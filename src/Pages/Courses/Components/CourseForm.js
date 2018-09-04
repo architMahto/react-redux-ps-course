@@ -13,11 +13,13 @@ const CourseForm = ({ course, onFieldChange, onSubmit, authors, loading, errors 
 								 name="title"
 								 placeholder="Enter course title"
 								 value={course.title}
+								 error={errors.title}
 								 onFieldChange={onFieldChange} />
 			<br/>
 			<SelectInput label="Author"
 									 name="authorId"
 									 value={course.authorId}
+									 error={errors.authorId}
 									 defaultOption="Select Author"
 									 options={authors}
 									 onFieldChange={onFieldChange} />
@@ -26,12 +28,14 @@ const CourseForm = ({ course, onFieldChange, onSubmit, authors, loading, errors 
 								 name="category"
 								 placeholder="Enter course category"
 								 value={course.category}
+								 error={errors.category}
 								 onFieldChange={onFieldChange} />
 			<br/>
 			<TextInput label="Length"
 								 name="length"
 								 placeholder="Enter course length"
 								 value={course.length}
+								 error={errors.length}
 								 onFieldChange={onFieldChange}/>
 			<br/>
 			<Button type={'submit'}

@@ -13,13 +13,12 @@ class ManageCourse extends Component {
 
 		this.state = {
 			authors: [],
-			course: {
-				title: ''
-			}
+			course: Object.assign({}, this.props.course),
+			errors: {}
 		};
 
 		this.onFieldChange = this.onFieldChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		this.onSubmit = this.onSubmit.bind(this);
 	}
 
 	onFieldChange(event) {
@@ -32,7 +31,7 @@ class ManageCourse extends Component {
 		});
 	}
 
-	handleSubmit(event) {
+	onSubmit(event) {
 		event.preventDefault();
 		alert(`Saving ${this.state.course.title}`);
 	}
@@ -46,8 +45,9 @@ class ManageCourse extends Component {
 						<Col xs={12} sm={8} md={6} smOffset={2} mdOffset={3}>
 							<CourseForm course={this.state.course}
 													authors={this.state.authors}
+													errors={this.state.errors}
 													onFieldChange={this.onFieldChange}
-													handleSubmit={this.handleSubmit} />
+													onSubmit={this.onSubmit} />
 						</Col>
 					</Row>
 				</Grid>
@@ -57,7 +57,8 @@ class ManageCourse extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-	return { state };
+	let course = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
+	return { course };
 }
 
 function mapDispatchToProps(dispatch) {
