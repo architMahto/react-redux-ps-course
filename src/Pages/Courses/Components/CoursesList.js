@@ -28,9 +28,11 @@ class CoursesList extends Component {
 				<PageHeader>Courses</PageHeader>
 				<Grid fluid={true}>
 					<Row>
-						<Link to={`${this.match.url}/add-course`}>
-							<Button type={'button'} bsStyle={'primary'}>Add Course</Button>
-						</Link>
+						<Col xs={12} sm={10} smOffset={1}>
+							<Link to={`${this.match.url}/add-course`}>
+								<Button type={'button'} bsStyle={'primary'}>Add Course</Button>
+							</Link>
+						</Col>
 					</Row>
 					<Row>
 						<Col xs={12} sm={10} smOffset={1}>
