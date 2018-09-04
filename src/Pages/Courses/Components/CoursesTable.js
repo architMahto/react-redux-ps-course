@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 
 import './CoursesTable.css';
@@ -7,7 +8,11 @@ const createCourseRow = () => {
 	return function (course, index) {
 		return (
 			<tr key={index}>
-				<td>{course.title}</td>
+				<td><a href={course.watchHref} target="_blank">Watch</a></td>
+				<td><Link to={'/courses/' + course.id}>{course.title}</Link></td>
+				<td>{course.authorId}</td>
+				<td>{course.category}</td>
+				<td>{course.length}</td>
 			</tr>
 		);
 	}
@@ -15,7 +20,7 @@ const createCourseRow = () => {
 
 const CoursesTable = ({ courses }) => {
 	return (
-		<Table bordered condensed hover>
+		<Table hover responsive>
 			<thead>
 				<tr>
 					<th>&nbsp;</th>

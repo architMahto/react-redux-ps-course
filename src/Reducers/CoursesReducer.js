@@ -10,6 +10,12 @@ export default function coursesReducer(state = createDefaultCoursesState(), acti
 				entities: [...state.entities, action.course]
 			};
 
+		case CoursesActionTypes.GET_COURSES_SUCCESS:
+			return {
+				...state,
+				entities: action.courses
+			};
+
 		default:
 			return state;
 	}

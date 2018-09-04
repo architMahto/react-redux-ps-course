@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { Button, Col, Grid, PageHeader, Row } from 'react-bootstrap';
+
+import * as CoursesActions from '../../../Actions/CoursesActions';
 
 import CoursesTable from './CoursesTable';
 
@@ -11,8 +14,12 @@ class CoursesList extends Component {
 	constructor(props) {
 		super(props);
 
-		this.courses = props.courses.entities;
+		this.actions = props.actions;
 		this.match = props.match;
+	}
+
+	UNSAFE_componentWillMount() {
+		this.actions.getCourses();
 	}
 
 	render() {
@@ -25,7 +32,7 @@ class CoursesList extends Component {
 							<Link to={`${this.match.url}/add-course`}>
 								<Button type={'button'} bsStyle={'primary'}>Add Course</Button>
 							</Link>
-							<CoursesTable courses={this.courses} />
+							<CoursesTable courses={this.props.courses.entities} />
 						</Col>
 					</Row>
 				</Grid>
@@ -40,4 +47,10 @@ function mapStateToProps(state, ownProps) {
 	};
 }
 
-export default connect(mapStateToProps)(CoursesList);
+function mapDispatchToProps(dispatch) {
+	return {
+		actions: bindActionCreators(CoursesActions, dispatch)
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesList);
