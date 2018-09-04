@@ -12,6 +12,7 @@ const TextInput = ({label, name, value, placeholder, onFieldChange, error}) => {
 									 value={value}
 									 onChange={onFieldChange}
 									 bsSize="lg"/>
+			<FormControl.Feedback />
 			{error && <HelpBlock>{error}</HelpBlock>}
 		</FormGroup>
 	)
