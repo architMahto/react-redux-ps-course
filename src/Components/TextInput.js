@@ -1,9 +1,10 @@
 import React from 'react';
-import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
+import { ControlLabel, FormControl, FormGroup, HelpBlock } from 'react-bootstrap';
 
 const TextInput = ({label, name, value, placeholder, onFieldChange, error}) => {
 	return (
-		<FormGroup controlId={name}>
+		<FormGroup controlId={name}
+							 validationState={error ? 'error' : null}>
 			<ControlLabel>{label}</ControlLabel>
 			<FormControl type="text"
 									 name={name}
@@ -11,6 +12,7 @@ const TextInput = ({label, name, value, placeholder, onFieldChange, error}) => {
 									 value={value}
 									 onChange={onFieldChange}
 									 bsSize="lg"/>
+			{error && <HelpBlock>{error}</HelpBlock>}
 		</FormGroup>
 	)
 };

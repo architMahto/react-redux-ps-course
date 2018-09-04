@@ -36,9 +36,9 @@ class ManageCourse extends Component {
 		return (
 			<div className="Manage-Course-Page">
 				<PageHeader>Manage Course</PageHeader>
-				<Grid>
+				<Grid fluid={true}>
 					<Row>
-						<Col xs={12} sm={3}>
+						<Col xs={12} sm={8} md={6} smOffset={2} mdOffset={3}>
 							<CourseForm course={this.state.course}
 													onFieldChange={this.onFieldChange}
 													handleSubmit={this.handleSubmit} />
