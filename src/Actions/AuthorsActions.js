@@ -1,6 +1,10 @@
 import * as AuthorsActionTypes from '../ActionTypes/AuthorsActionTypes';
 import MockAuthorApi from '../Api/MockAuthorApi';
 
+export const getAuthorsError = (error) => {
+	return {type: AuthorsActionTypes.GET_AUTHORS_ERROR, error};
+};
+
 export const getAuthorsStarted = () => {
 	return {type: AuthorsActionTypes.GET_AUTHORS_STARTED};
 };
@@ -18,7 +22,7 @@ export const getAuthors = () => {
 				dispatch(getAuthorsSuccess(authors))
 			})
 			.catch(error => {
-				throw(error);
+				dispatch(getAuthorsError(error));
 			})
 	}
 };

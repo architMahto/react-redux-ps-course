@@ -1,6 +1,10 @@
 import * as CoursesActionTypes from '../ActionTypes/CoursesActionTypes';
 import MockCourseApi from '../Api/MockCourseApi';
 
+export const createCourseError = (error) => {
+	return {type: CoursesActionTypes.CREATE_COURSE_ERROR, error};
+};
+
 export const createCourseSuccess = (course) => {
 	return {type: CoursesActionTypes.CREATE_COURSE_SUCCESS, course};
 };
@@ -14,9 +18,13 @@ export const getCourses = () => {
 				dispatch(getCoursesSuccess(courses));
 			})
 			.catch(error => {
-				throw(error);
+				dispatch(getCoursesError(error));
 			});
 	};
+};
+
+export const getCoursesError = (error) => {
+	return {type: CoursesActionTypes.GET_COURSES_ERROR, error}
 };
 
 export const getCoursesStarted = () => {
@@ -46,6 +54,10 @@ export const saveCourse = (course) => {
 export const saveCourseStarted = () => {
 	return {type: CoursesActionTypes.SAVE_COURSE_STARTED};
 };
+
+export const updateCourseError = (error) => {
+	return {type: CoursesActionTypes.UPDATE_COURSE_ERROR, error};
+}
 
 export const updateCourseSuccess = (course) => {
 	return {type: CoursesActionTypes.UPDATE_COURSE_SUCCESS, course};
