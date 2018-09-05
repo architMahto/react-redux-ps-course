@@ -21,14 +21,16 @@ class CoursesListContainer extends Component {
 	}
 
 	componentDidMount() {
-		this.actions.getCourses();
+		if (!this.props.courses.getCoursesLoadable.isReceived) {
+			this.actions.getCourses();
+		}
 	}
 
 	render() {
 		return (
 			<div className="Courses-List-Page">
 				<PageHeader>Courses</PageHeader>
-				<CoursesListWithLoading isLoading={this.props.courses.isLoading}
+				<CoursesListWithLoading isLoading={this.props.courses.getCoursesLoadable.isLoading}
 																courses={this.props.courses.entities}
 																match={this.match} />
 			</div>

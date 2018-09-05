@@ -10,38 +10,39 @@ export default function coursesReducer(state = createDefaultCoursesState(), acti
 		case CoursesActionTypes.CREATE_COURSE_SUCCESS:
 			return {
 				...state,
-				entities: [...state.entities, action.course]
+				entities: [...state.entities, action.course],
+				saveCoursesLoadable: updateLoadableOnSuccess()
 			};
 
 		case CoursesActionTypes.GET_COURSES_ERROR:
 			return {
 				...state,
-				...updateLoadableOnError(action.error)
+				getCoursesLoadable: updateLoadableOnError(action.error)
 			};
 
 		case CoursesActionTypes.GET_COURSES_STARTED:
 			return {
 				...state,
-				...updateLoadableOnStart()
+				getCoursesLoadable: updateLoadableOnStart()
 			};
 
 		case CoursesActionTypes.GET_COURSES_SUCCESS:
 			return {
 				...state,
 				entities: action.courses,
-				...updateLoadableOnSuccess()
+				getCoursesLoadable: updateLoadableOnSuccess()
 			};
 
 		case CoursesActionTypes.SAVE_COURSE_ERROR:
 			return {
 				...state,
-				...updateLoadableOnError(action.error)
+				saveCoursesLoadable: updateLoadableOnError(action.error)
 			};
 
 		case CoursesActionTypes.SAVE_COURSE_STARTED:
 			return {
 				...state,
-				...updateLoadableOnStart()
+				saveCoursesLoadable: updateLoadableOnStart()
 			};
 
 		case CoursesActionTypes.UPDATE_COURSE_SUCCESS:
@@ -53,7 +54,8 @@ export default function coursesReducer(state = createDefaultCoursesState(), acti
 					}
 
 					return course;
-				})
+				}),
+				saveCoursesLoadable: updateLoadableOnSuccess()
 			};
 
 		default:
