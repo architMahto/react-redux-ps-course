@@ -1,4 +1,5 @@
 import React from 'react';
+import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 import { Grid, Image, Nav, Navbar, NavItem} from 'react-bootstrap';
 
 import './Header.css';
@@ -10,17 +11,23 @@ const Header = () => {
 			<Grid>
 				<Navbar.Header>
 					<Navbar.Brand>
-						<a className="App-logo-link" href="/">
+						<LinkContainer className="App-logo-link" to="/">
 							<Image src={logo} className="App-logo" />
-						</a>
+						</LinkContainer>
 					</Navbar.Brand>
 					<Navbar.Toggle />
 				</Navbar.Header>
 				<Navbar.Collapse>
 					<Nav>
-						<NavItem eventKey={1} href="/">Home</NavItem>
-						<NavItem eventKey={2} href="/about">About</NavItem>
-						<NavItem eventKey={3} href="/courses">Courses</NavItem>
+						<IndexLinkContainer to="/">
+							<NavItem eventKey={1}>Home</NavItem>
+						</IndexLinkContainer>
+						<LinkContainer to="/about">
+							<NavItem eventKey={2}>About</NavItem>
+						</LinkContainer>
+						<LinkContainer to="/courses">
+							<NavItem eventKey={3}>Courses</NavItem>
+						</LinkContainer>
 					</Nav>
 				</Navbar.Collapse>
 			</Grid>
