@@ -7,6 +7,12 @@ import * as AuthorsActionTypes from '../ActionTypes/AuthorsActionTypes';
 
 export default function authorsReducer(state = createDefaultAuthorsState(), action) {
 	switch (action.type) {
+		case AuthorsActionTypes.GET_AUTHORS_ERROR:
+			return {
+				...state,
+				...updateLoadableOnError(action.error)
+			};
+
 		case AuthorsActionTypes.GET_AUTHORS_STARTED:
 			return {
 				...state,

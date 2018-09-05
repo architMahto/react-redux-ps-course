@@ -13,6 +13,12 @@ export default function coursesReducer(state = createDefaultCoursesState(), acti
 				entities: [...state.entities, action.course]
 			};
 
+		case CoursesActionTypes.GET_COURSES_ERROR:
+			return {
+				...state,
+				...updateLoadableOnError(action.error)
+			};
+
 		case CoursesActionTypes.GET_COURSES_STARTED:
 			return {
 				...state,
@@ -24,6 +30,12 @@ export default function coursesReducer(state = createDefaultCoursesState(), acti
 				...state,
 				entities: action.courses,
 				...updateLoadableOnSuccess()
+			};
+
+		case CoursesActionTypes.SAVE_COURSE_ERROR:
+			return {
+				...state,
+				...updateLoadableOnError(action.error)
 			};
 
 		case CoursesActionTypes.SAVE_COURSE_STARTED:
