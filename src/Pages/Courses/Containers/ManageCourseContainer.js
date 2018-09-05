@@ -7,8 +7,11 @@ import * as AuthorsActions from '../../../Actions/AuthorsActions';
 import * as CoursesActions from '../../../Actions/CoursesActions';
 
 import ManageCourse from '../Components/ManageCourse';
+import WithLoading from '../../../Components/WithLoading';
 
 import './ManageCourseContainer.css';
+
+const ManageCourseWithLoading = WithLoading(ManageCourse);
 
 class ManageCourseContainer extends Component {
 	constructor(props) {
@@ -54,11 +57,12 @@ class ManageCourseContainer extends Component {
 		return (
 			<div className="Manage-Course-Page">
 				<PageHeader>Manage Course</PageHeader>
-				<ManageCourse course={this.state.course}
-											authors={this.props.authors}
-											errors={this.state.errors}
-											onFieldChange={this.onFieldChange}
-											onSubmit={this.onSubmit} />
+				<ManageCourseWithLoading isLoading={this.props.authorsStateIsLoading}
+																 course={this.state.course}
+																 authors={this.props.authors}
+																 errors={this.state.errors}
+																 onFieldChange={this.onFieldChange}
+																 onSubmit={this.onSubmit} />
 			</div>
 		);
 	}
@@ -74,7 +78,8 @@ function mapStateToProps(state, ownProps) {
 		authors: state.authors.entities.map(author => {
 			return {value: author.id, text: `${author.firstName} ${author.lastName}`};
 		}),
-		course
+		course,
+		authorsStateIsLoading: state.authors.isLoading,
 	};
 }
 
