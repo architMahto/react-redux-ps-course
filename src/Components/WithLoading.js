@@ -1,12 +1,14 @@
 import React from 'react';
 
+import './WithLoading.css';
+
 const WithLoading = (Component) => {
 	return function WithLoadingComponent({ isLoading, ...props }) {
 		if (!isLoading) {
 			return (<Component {...props} />);
 		}
 
-		return (<p>Loading...</p>);
+		return (<div className="Loader" />);
 	};
 };
 
