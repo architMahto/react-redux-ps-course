@@ -6,8 +6,11 @@ import { PageHeader } from 'react-bootstrap';
 import * as CoursesActions from '../../../Actions/CoursesActions';
 
 import CoursesList from '../Components/CoursesList';
+import WithLoading from '../../../Components/WithLoading';
 
 import './CoursesListContainer.css';
+
+const CoursesListWithLoading = WithLoading(CoursesList);
 
 class CoursesListContainer extends Component {
 	constructor(props) {
@@ -25,7 +28,9 @@ class CoursesListContainer extends Component {
 		return (
 			<div className="Courses-List-Page">
 				<PageHeader>Courses</PageHeader>
-				<CoursesList courses={this.props.courses.entities} match={this.match}/>
+				<CoursesListWithLoading isLoading={this.props.courses.isLoading}
+																courses={this.props.courses.entities}
+																match={this.match} />
 			</div>
 		);
 	}
