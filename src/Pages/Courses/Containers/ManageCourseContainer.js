@@ -34,7 +34,10 @@ class ManageCourseContainer extends Component {
 		if (this.match.params.hasOwnProperty('id') && !this.state.course.title) {
 			this.history.push('/courses');
 		}
-		this.authorsActions.getAuthors();
+
+		if (!this.props.authors.getAuthorsLoadable.isReceived) {
+			this.authorsActions.getAuthors();
+		}
 	}
 
 	onFieldChange(event) {
@@ -50,16 +53,23 @@ class ManageCourseContainer extends Component {
 	onSubmit(event) {
 		event.preventDefault();
 		this.coursesActions.saveCourse(this.state.course);
-		// this.history.push('/courses');
+	}
+
+	buildAuthors() {
+		return this.props.authors.entities.map(author => {
+			return {value: author.id, text: `${author.firstName} ${author.lastName}`};
+		})
 	}
 
 	render() {
+		let authors = this.buildAuthors();
+
 		return (
 			<div className="Manage-Course-Page">
 				<PageHeader>Manage Course</PageHeader>
-				<ManageCourseWithLoading isLoading={this.props.authorsStateIsLoading}
+				<ManageCourseWithLoading isLoading={this.props.authors.getAuthorsLoadable.isLoading}
 																 course={this.state.course}
-																 authors={this.props.authors}
+																 authors={authors}
 																 errors={this.state.errors}
 																 onFieldChange={this.onFieldChange}
 																 onSubmit={this.onSubmit} />
@@ -75,11 +85,8 @@ function mapStateToProps(state, ownProps) {
 		{id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
 
 	return {
-		authors: state.authors.entities.map(author => {
-			return {value: author.id, text: `${author.firstName} ${author.lastName}`};
-		}),
-		course,
-		authorsStateIsLoading: state.authors.isLoading,
+		authors: state.authors,
+		course
 	};
 }
 

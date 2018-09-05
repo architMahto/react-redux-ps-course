@@ -10,20 +10,20 @@ export default function authorsReducer(state = createDefaultAuthorsState(), acti
 		case AuthorsActionTypes.GET_AUTHORS_ERROR:
 			return {
 				...state,
-				...updateLoadableOnError(action.error)
+				getAuthorsLoadable: updateLoadableOnError(action.error)
 			};
 
 		case AuthorsActionTypes.GET_AUTHORS_STARTED:
 			return {
 				...state,
-				...updateLoadableOnStart()
+				getAuthorsLoadable: updateLoadableOnStart()
 			};
 
 		case AuthorsActionTypes.GET_AUTHORS_SUCCESS:
 			return {
 				...state,
 				entities: action.authors,
-				...updateLoadableOnSuccess()
+				getAuthorsLoadable: updateLoadableOnSuccess()
 			};
 
 		default:
