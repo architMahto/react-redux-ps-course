@@ -1,5 +1,8 @@
 export const createDefaultAuthorsState = () => {
 	return {
-		entities: []
+		entities: [],
+		isLoading: false,
+		isReceived: false,
+		error: null
 	}
 };
