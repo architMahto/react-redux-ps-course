@@ -70,6 +70,7 @@ class ManageCourseContainer extends Component {
 				<ManageCourseWithLoading isLoading={this.props.authors.getAuthorsLoadable.isLoading}
 																 course={this.state.course}
 																 authors={authors}
+																 loading={this.props.saveCoursesLoadable.isLoading}
 																 errors={this.state.errors}
 																 onFieldChange={this.onFieldChange}
 																 onSubmit={this.onSubmit} />
@@ -86,7 +87,8 @@ function mapStateToProps(state, ownProps) {
 
 	return {
 		authors: state.authors,
-		course
+		course,
+		saveCoursesLoadable: state.courses.saveCoursesLoadable
 	};
 }
 
