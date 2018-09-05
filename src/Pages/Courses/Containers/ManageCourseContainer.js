@@ -50,7 +50,7 @@ class ManageCourseContainer extends Component {
 	onSubmit(event) {
 		event.preventDefault();
 		this.coursesActions.saveCourse(this.state.course);
-		this.history.push('/courses');
+		// this.history.push('/courses');
 	}
 
 	render() {

@@ -1,5 +1,6 @@
 import * as CoursesActionTypes from '../ActionTypes/CoursesActionTypes';
 import MockCourseApi from '../Api/MockCourseApi';
+import history from '../Utils/History';
 
 export const createCourseSuccess = (course) => {
 	return {type: CoursesActionTypes.CREATE_COURSE_SUCCESS, course};
@@ -40,6 +41,7 @@ export const saveCourse = (course) => {
 				course.id ?
 					dispatch(updateCourseSuccess(savedCourse)) :
 					dispatch(createCourseSuccess(savedCourse));
+				history.push('/courses');
 			})
 			.catch(error => {
 				dispatch(saveCourseError(error));

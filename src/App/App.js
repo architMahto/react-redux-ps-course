@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import Header from '../Components/Header';
@@ -10,6 +10,7 @@ import Home from '../Pages/Home/Home';
 import NotFound from '../Pages/NotFound/NotFound';
 
 import configureStore from '../Store/ConfigureStore';
+import history from '../Utils/History';
 
 import './App.css';
 
@@ -19,7 +20,7 @@ class App extends Component {
   render() {
   	return (
   		<Provider store={store}>
-				<Router>
+				<Router history={history}>
 					<div className="App">
 						<Header />
 						<Switch>
