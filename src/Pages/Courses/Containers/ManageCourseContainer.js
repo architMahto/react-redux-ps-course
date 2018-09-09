@@ -6,6 +6,7 @@ import { PageHeader } from 'react-bootstrap';
 import * as AuthorsActions from '../../../Actions/AuthorsActions';
 import * as CoursesActions from '../../../Actions/CoursesActions';
 
+import ButtonLink from '../../../Components/ButtonLink';
 import ManageCourse from '../Components/ManageCourse';
 import WithLoading from '../../../Components/WithLoading';
 
@@ -67,13 +68,19 @@ class ManageCourseContainer extends Component {
 		return (
 			<div className="Manage-Course-Page">
 				<PageHeader>Manage Course</PageHeader>
-				<ManageCourseWithLoading isLoading={this.props.authors.getAuthorsLoadable.isLoading}
+				<ManageCourseWithLoading loadable={this.props.authors.getAuthorsLoadable}
 																 course={this.state.course}
 																 authors={authors}
 																 loading={this.props.saveCoursesLoadable.isLoading}
 																 errors={this.state.errors}
 																 onFieldChange={this.onFieldChange}
 																 onSubmit={this.onSubmit} />
+				{
+					this.props.authors.getAuthorsLoadable.error ?
+						<ButtonLink buttonText={'Back to Courses'}
+												route={'/courses'} /> :
+						null
+				}
 			</div>
 		);
 	}

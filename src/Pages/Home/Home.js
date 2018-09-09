@@ -1,6 +1,7 @@
 import React from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Button, Jumbotron } from 'react-bootstrap';
+import { Jumbotron } from 'react-bootstrap';
+
+import ButtonLink from '../../Components/ButtonLink';
 
 import './Home.css';
 
@@ -10,13 +11,8 @@ const Home = () => {
 			<Jumbotron>
 				<h1>Pluralsight Administration</h1>
 				<p>React, React Router, and Flux for ultra-responsive web apps.</p>
-				<LinkContainer to="/about">
-					<Button type={'button'}
-									bsSize={'lg'}
-									bsStyle={'primary'}>
-						Learn more
-					</Button>
-				</LinkContainer>
+				<ButtonLink buttonText={'Learn more'}
+										route={'/about'}/>
 			</Jumbotron>
 		</div>
 	);
