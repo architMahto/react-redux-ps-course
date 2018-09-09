@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import NotificationsSystem from 'reapop';
+import theme from 'reapop-theme-bootstrap';
 
 import Header from '../Components/Header';
 
@@ -22,6 +24,7 @@ class App extends Component {
   		<Provider store={store}>
 				<Router history={history}>
 					<div className="App">
+						<NotificationsSystem className="Notifications-System" theme={theme} />
 						<Header />
 						<Switch>
 							<Route path="/" exact component={Home} />

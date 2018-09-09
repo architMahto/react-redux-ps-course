@@ -1,6 +1,14 @@
+import {addNotification, updateNotification} from 'reapop';
+
 import * as CoursesActionTypes from '../ActionTypes/CoursesActionTypes';
 import MockCourseApi from '../Api/MockCourseApi';
 import history from '../Utils/History';
+
+import {
+	createErrorNotification,
+	createLoadingNotification,
+	createSuccessNotification
+} from '../Utils/CreateNotifcations';
 
 export const createCourseSuccess = (course) => {
 	return {type: CoursesActionTypes.CREATE_COURSE_SUCCESS, course};
@@ -34,7 +42,9 @@ export const getCoursesSuccess = (courses) => {
 
 export const saveCourse = (course) => {
 	return (dispatch) => {
+		let notification = createLoadingNotification('Saving course');
 		dispatch(saveCourseStarted());
+		dispatch(addNotification(notification));
 
 		return MockCourseApi.saveCourse(course)
 			.then(savedCourse => {
@@ -42,9 +52,12 @@ export const saveCourse = (course) => {
 					dispatch(updateCourseSuccess(savedCourse)) :
 					dispatch(createCourseSuccess(savedCourse));
 				history.push('/courses');
+				dispatch(updateNotification(createSuccessNotification(notification, 'Successfully saved course')));
 			})
 			.catch(error => {
 				dispatch(saveCourseError(error));
+				history.push('/courses');
+				dispatch(updateNotification(createErrorNotification(notification, 'Could not save course')))
 			})
 	};
 };
