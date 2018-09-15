@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const paths = require('react-scripts/config/paths');
+const webpack = require('webpack');
 
 const appDirectory = fs.realpathSync(process.cwd());
 const publicPath = paths.servedPath;
@@ -52,5 +53,17 @@ module.exports = {
 			}
 		]
 	},
-	externals: nodeModules
+	externals: nodeModules,
+	plugins: [
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				comparisons: false,
+			},
+			output: {
+				comments: false,
+				ascii_only: true
+			},
+			sourceMap: shouldUseSourceMap
+		}),
+	]
 };
