@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import NotificationsSystem from 'reapop';
-import theme from 'reapop-theme-bootstrap';
+import theme from 'reapop-theme-wybo';
 
 import Header from '../Components/Header';
 
